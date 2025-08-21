@@ -7,17 +7,19 @@
     html, body {
       margin: 0; padding: 0; height: 100%;
       background: black;
-      overflow: hidden;
       display: flex; justify-content: center; align-items: center;
       color: white;
       font-family: sans-serif;
       user-select: none;
+      overflow: hidden;
     }
     video {
-      display: none;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
+      /* Make the video invisible but still playable */
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
     }
     button {
       padding: 1em 2em;
@@ -32,10 +34,10 @@
 </head>
 <body>
 
-  <button id="playBtn">Play Video Fullscreen</button>
-  <video id="funVideo" muted>
+  <button id="playBtn">Play Video</button>
+  <video id="funVideo" preload="auto">
     <source src="fun-video-you-should-open.mp4" type="video/mp4" />
-    Your browser does not support this file
+    Your browser does not support this file.
   </video>
 
   <script>
@@ -44,17 +46,10 @@
 
     playBtn.addEventListener('click', async () => {
       playBtn.style.display = 'none';
-      video.style.display = 'block';
       try {
-        if (video.requestFullscreen) {
-          await video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) {
-          await video.webkitRequestFullscreen();
-        }
-        video.play();
+        await video.play(); // play unmuted, requires user gesture
       } catch (e) {
-        console.error('Fullscreen request failed:', e);
-        video.play();
+        console.error('Video play failed:', e);
       }
     });
 
