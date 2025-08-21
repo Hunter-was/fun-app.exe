@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fullscreen Video</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    video { width: 100vw; height: 100vh; object-fit: cover; }
+  </style>
+</head>
+<body>
+  <video id="myVideo" src="fun-app.mp4" playsinline></video> 
+
+  <script>
+    const video = document.getElementById('myVideo');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      video.requestFullscreen(); 
+      video.play(); // Start playback after fullscreen
+    });
+
+    video.addEventListener('ended', () => {
+      window.close(); // Close the tab or window after video finishes
+    });
+  </script>
+</body>
+</html>
