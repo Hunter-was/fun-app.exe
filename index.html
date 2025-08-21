@@ -7,56 +7,24 @@
     html, body {
       margin: 0; padding: 0; height: 100%;
       background: black;
-      display: flex; justify-content: center; align-items: center;
-      color: white;
-      font-family: sans-serif;
-      user-select: none;
       overflow: hidden;
+      user-select: none;
     }
     video {
-      /* Make the video invisible but still playable */
       position: absolute;
       width: 0;
       height: 0;
       opacity: 0;
       pointer-events: none;
     }
-    button {
-      padding: 1em 2em;
-      font-size: 1.5em;
-      cursor: pointer;
-      background: #222;
-      border: none;
-      color: white;
-      border-radius: 5px;
-    }
   </style>
 </head>
 <body>
 
-  <button id="playBtn">ENTER APPLICATION</button>
-  <video id="funVideo" preload="auto">
+  <video id="funVideo" autoplay muted playsinline preload="auto">
     <source src="fun-video-you-should-open.mp4" type="video/mp4" />
     Your browser does not support this file.
   </video>
-
-  <script>
-    const playBtn = document.getElementById('playBtn');
-    const video = document.getElementById('funVideo');
-
-    playBtn.addEventListener('click', async () => {
-      playBtn.style.display = 'none';
-      try {
-        await video.play(); // play unmuted, requires user gesture
-      } catch (e) {
-        console.error('Video play failed:', e);
-      }
-    });
-
-    video.onended = () => {
-      window.open('', '_self').close();
-    };
-  </script>
 
 </body>
 </html>
