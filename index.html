@@ -1,26 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Compromised Disc</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>"[MALWARE DETCTED] - TROJAN HORSE"</title>
   <style>
-    body { margin: 0; overflow: hidden; }
-    video { width: 100vw; height: 100vh; object-fit: cover; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
-  <video id="myVideo" src="fun-app-you-should-open.mov" playsinline></video> 
+
+  <video id="funVideo" autoplay muted playsinline>
+    <source src="fun-video-you-should-open.mov" type="video/quicktime">
+    Your browser does not support this file
+  </video>
 
   <script>
-    const video = document.getElementById('myVideo');
+    const video = document.getElementById('funVideo');
 
-    document.addEventListener('DOMContentLoaded', () => {
-      video.requestFullscreen(); 
-      video.play(); // Start playback after fullscreen
+    // Attempt to make fullscreen
+    video.addEventListener('loadedmetadata', () => {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
     });
 
-    video.addEventListener('ended', () => {
-      window.close(); // Close the tab or window after video finishes
-    });
+    // Attempt to close tab when video ends
+    video.onended = () => {
+      window.open('', '_self')?.close();
+    };
   </script>
+
 </body>
 </html>
