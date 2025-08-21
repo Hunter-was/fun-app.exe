@@ -2,47 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[MALWARE DETCTED] TROJAN HORSE application</title>
+  <title>MALWARE DETECTED - TROJAN HORSE EMBEDDED</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+      margin: 0; padding: 0; height: 100%;
       background: black;
       overflow: hidden;
+      display: flex; justify-content: center; align-items: center;
+      color: white;
+      font-family: sans-serif;
+      user-select: none;
     }
     video {
+      display: none;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
+    }
+    button {
+      padding: 1em 2em;
+      font-size: 1.5em;
+      cursor: pointer;
+      background: #222;
+      border: none;
+      color: white;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
 
-  <video id="funVideo" autoplay muted playsinline>
-    <source src="fun-video-you-should-open.mp4" type="video/quicktime">
+  <button id="playBtn">Play Video Fullscreen</button>
+  <video id="funVideo" muted>
+    <source src="fun-video-you-should-open.mp4" type="video/mp4" />
     Your browser does not support this file
   </video>
 
   <script>
+    const playBtn = document.getElementById('playBtn');
     const video = document.getElementById('funVideo');
 
-    // Attempt to make fullscreen
-    video.addEventListener('loadedmetadata', () => {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
+    playBtn.addEventListener('click', async () => {
+      playBtn.style.display = 'none';
+      video.style.display = 'block';
+      try {
+        if (video.requestFullscreen) {
+          await video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          await video.webkitRequestFullscreen();
+        }
+        video.play();
+      } catch (e) {
+        console.error('Fullscreen request failed:', e);
+        video.play();
       }
     });
 
-    // Attempt to close tab when video ends
     video.onended = () => {
-      window.open('', '_self')?.close();
+      window.open('', '_self').close();
     };
   </script>
 
