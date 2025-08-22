@@ -5,57 +5,32 @@
   <title>MALWARE DETECTED - TROJAN HORSE EMBEDDED</title>
   <style>
     html, body {
-      margin: 0; padding: 0; height: 100%;
+      margin: 0;
+      padding: 0;
+      height: 100%;
       background: black;
       overflow: hidden;
-      user-select: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-family: sans-serif;
-    }
-    button {
-      padding: 1em 2em;
-      font-size: 1.5em;
-      cursor: pointer;
-      background: #222;
-      border: none;
-      color: white;
-      border-radius: 5px;
     }
     video {
-      position: absolute;
-      width: 0;
-      height: 0;
-      opacity: 0;
-      pointer-events: none;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <button id="playBtn">ENTER APPLICATION</button>
-  <video id="funVideo" muted preload="auto">
+  <video id="funVideo" autoplay muted playsinline preload="auto">
     <source src="https://hunter-was.github.io/fun-app.exe/fun-video-you-should-open.mp4" type="video/mp4" />
-    Your browser does not support this file.
+    Your browser does not support this video.
   </video>
 
   <script>
-    const playBtn = document.getElementById('playBtn');
     const video = document.getElementById('funVideo');
 
-    playBtn.addEventListener('click', async () => {
-      playBtn.style.display = 'none';
-      try {
-        await video.play();
-      } catch (e) {
-        console.error('Video play failed:', e);
-      }
-    });
-
     video.onended = () => {
-      window.open('', '_self').close();
+      window.location.href = "https://www.google.com";
     };
   </script>
 
